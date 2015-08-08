@@ -70,8 +70,9 @@ export default class MarkerCreator extends Component {
   }
 
   static _createMarker (mapHolderRef, markerProps) {
+    var MapMarker = require('map-icons');
     // https://developers.google.com/maps/documentation/javascript/3.exp/reference#Marker
-    const marker = new google.maps.Marker(composeOptions(markerProps, [
+    const marker = new MapMarker(composeOptions(markerProps, [
       // https://developers.google.com/maps/documentation/javascript/3.exp/reference#MarkerOptions
       "animation",
       "attribution",
@@ -80,6 +81,7 @@ export default class MarkerCreator extends Component {
       "draggable",
       "icon",
       "label",
+      "custom_label",
       "opacity",
       "place",
       "position",
