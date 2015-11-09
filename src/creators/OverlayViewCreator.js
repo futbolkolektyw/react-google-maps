@@ -56,7 +56,7 @@ export default class OverlayViewCreator extends Component {
     };
 
     overlayView.onRemove = function () {
-      React.unmountComponentAtNode(this._containerElement);
+      ReactDOM.unmountComponentAtNode(this._containerElement);
       this._unmountContainerFromPane();
       this._containerElement = null;
     };
