@@ -3,6 +3,8 @@ import {
   Children,
 } from "react";
 
+import {default as ReactDOM} from "react-dom";
+
 function renderElement (
   contentElement,
   prevContent
@@ -11,8 +13,7 @@ function renderElement (
     prevContent = document.createElement("div");
   }
 
-  // FIXME: React@0.14
-  React.render(contentElement, prevContent);
+  ReactDOM.render(contentElement, prevContent);
   return prevContent;
 }
 
