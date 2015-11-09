@@ -36,6 +36,8 @@ export const markerControlledPropTypes = {
   title: PropTypes.string,
   visible: PropTypes.bool,
   zIndex: PropTypes.number,
+  // !!! custom label for marker with overlay !!!
+  custom_label: PropTypes.string,
 };
 
 export const markerDefaultPropTypes = defaultPropsCreator(markerControlledPropTypes);
@@ -78,7 +80,6 @@ export default class MarkerCreator extends Component {
     const {mapHolderRef} = markerProps;
     var MapMarker = require('map-icons');
     // https://developers.google.com/maps/documentation/javascript/3.exp/reference#Marker
-    var mapMarkerControlledPropTypes = markerControlledPropTypes.concat('custom_label');
     const marker = new MapMarker(composeOptions(markerProps, markerControlledPropTypes));
 
     marker.setMap(mapHolderRef.getMap());
