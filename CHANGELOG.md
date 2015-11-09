@@ -1,3 +1,99 @@
+<a name="4.2.0"></a>
+# [4.2.0](https://github.com/tomchentw/react-google-maps/compare/v4.1.1...v4.2.0) (2015-10-15)
+
+
+### Bug Fixes
+
+* **src:** replace fbjs dependencies with can-use-dom ([43250b3](https://github.com/tomchentw/react-google-maps/commit/43250b3)), closes [#134](https://github.com/tomchentw/react-google-maps/issues/134)
+
+
+
+<a name="4.1.1"></a>
+## [4.1.1](https://github.com/tomchentw/react-google-maps/compare/v4.1.0...v4.1.1) (2015-10-14)
+
+
+### Bug Fixes
+
+* **src:** switch to findDOMNode from "react-dom" ([593b1c8](https://github.com/tomchentw/react-google-maps/commit/593b1c8)), closes [#132](https://github.com/tomchentw/react-google-maps/issues/132)
+
+
+
+<a name="4.1.0"></a>
+# [4.1.0](https://github.com/tomchentw/react-google-maps/compare/v4.0.0...v4.1.0) (2015-10-13)
+
+
+### Features
+
+* **src:** move instance creation in componentWillMount ([91d5790](https://github.com/tomchentw/react-google-maps/commit/91d5790))
+* **src:** update composeOptions to accept controlledPropTypes for _2 ([03aee4d](https://github.com/tomchentw/react-google-maps/commit/03aee4d))
+
+
+
+<a name="4.0.0"></a>
+# [4.0.0](https://github.com/tomchentw/react-google-maps/compare/v3.0.0...v4.0.0) (2015-10-08)
+
+
+### Features
+
+* **package.json:** upgrade to React@^0.14 ([443a5fd](https://github.com/tomchentw/react-google-maps/commit/443a5fd)), closes [#127](https://github.com/tomchentw/react-google-maps/issues/127) [#102](https://github.com/tomchentw/react-google-maps/issues/102)
+
+
+### BREAKING CHANGES
+
+* * __React@^0.14__: upgrade React in peerDependencies
+	* add __react-dom@^0.14__ to peerDependencies
+
+
+
+<a name"3.0.0"></a>
+## 3.0.0 (2015-09-30)
+
+
+#### Bug Fixes
+
+* **package.json:** remove react from dependencies ([bfd37877](https://github.com/tomchentw/react-google-maps/commit/bfd37877), closes [#109](https://github.com/tomchentw/react-google-maps/issues/109))
+
+
+<a name"2.2.0"></a>
+## 2.2.0 (2015-09-30)
+
+
+#### Bug Fixes
+
+* **Marker:** allow null and undefined as children ([17daa0a2](https://github.com/tomchentw/react-google-maps/commit/17daa0a2), closes [#119](https://github.com/tomchentw/react-google-maps/issues/119))
+
+
+<a name"2.1.1"></a>
+### 2.1.1 (2015-09-30)
+
+
+#### Bug Fixes
+
+* **InfoBox:** typo when update InfoBox children ([a66852c4](https://github.com/tomchentw/react-google-maps/commit/a66852c4), closes [#120](https://github.com/tomchentw/react-google-maps/issues/120))
+
+
+<a name"2.1.0"></a>
+## 2.1.0 (2015-09-08)
+
+
+#### Features
+
+* **SearchBox:** Support for Google Places API search box ([b06f5d6c](https://github.com/tomchentw/react-google-maps/commit/b06f5d6c), closes [#110](https://github.com/tomchentw/react-google-maps/issues/110))
+
+
+<a name"2.0.3"></a>
+### 2.0.3 (2015-08-18)
+
+
+#### Bug Fixes
+
+* **OverlayView:**
+  * add invariant for mapPaneName ([f102577c](https://github.com/tomchentw/react-google-maps/commit/f102577c))
+  * add invariant checking for position props ([757bda08](https://github.com/tomchentw/react-google-maps/commit/757bda08))
+  * add position to propTypes ([1fc968ad](https://github.com/tomchentw/react-google-maps/commit/1fc968ad), closes [#99](https://github.com/tomchentw/react-google-maps/issues/99))
+* **package.json:** remove object-path ([ee55b7a5](https://github.com/tomchentw/react-google-maps/commit/ee55b7a5))
+
+
 <a name"2.0.2"></a>
 ### 2.0.2 (2015-08-08)
 

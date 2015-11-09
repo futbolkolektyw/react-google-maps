@@ -4,6 +4,7 @@ import {
   Component,
   Children,
 } from "react";
+import {default as invariant} from "invariant";
 
 import {default as defaultPropsCreator} from "../utils/defaultPropsCreator";
 import {default as composeOptions} from "../utils/composeOptions";
@@ -14,7 +15,14 @@ export const overlayViewControlledPropTypes = {
 // CustomProps
   mapPaneName: PropTypes.string,
   getPixelPositionOffset: PropTypes.func,
+  position: PropTypes.object,
+  children: PropTypes.node,
+// NOTICE!!!!!!
+//
+// Only expose those with getters & setters in the table as controlled props.
+//
 // [].map.call($0.querySelectorAll("tr>td>code"), function(it){ return it.textContent; }).filter(function(it){ return it.match(/^set/) && !it.match(/^setMap/); })
+//
 // https://developers.google.com/maps/documentation/javascript/3.exp/reference
 };
 
@@ -27,14 +35,11 @@ export default class OverlayViewCreator extends Component {
     overlayView: PropTypes.object.isRequired,
   }
 
-  static _createOverlayView (mapHolderRef, overlayViewProps) {
+  static _createOverlayView (overlayViewProps) {
+    const {mapHolderRef} = overlayViewProps;
     // https://developers.google.com/maps/documentation/javascript/3.exp/reference#OverlayView
     const overlayView = new google.maps.OverlayView();
-    overlayView.setValues(composeOptions(overlayViewProps, [
-      "mapPaneName",
-      "getPixelPositionOffset",
-      "children",
-    ]));
+    overlayView.setValues(composeOptions(overlayViewProps, overlayViewControlledPropTypes));
 
     overlayView.onAdd = function () {
       this._containerElement = document.createElement("div");
@@ -63,6 +68,7 @@ export default class OverlayViewCreator extends Component {
     };
 
     overlayView._renderContent = function () {
+      // FIXME: React@0.14
       React.render(
         Children.only(this.get("children")),
         this._containerElement
@@ -71,6 +77,8 @@ export default class OverlayViewCreator extends Component {
 
     overlayView._mountContainerToPane = function () {
       const mapPaneName = this.get("mapPaneName");
+      invariant(!!mapPaneName, "OverlayView requires a mapPaneName/defaultMapPaneName in your props instead of %s", mapPaneName);
+
       this.getPanes()[mapPaneName].appendChild(this._containerElement);
     };
 
@@ -98,6 +106,8 @@ export default class OverlayViewCreator extends Component {
     overlayView._getPixelPosition = function () {
       let projection = this.getProjection();
       let position = this.get("position");
+      invariant(!!position, "OverlayView requires a position/defaultPosition in your props instead of %s", position);
+
       if (projection && position) {
         if (!(position instanceof google.maps.LatLng)) {
           position = new google.maps.LatLng(position.lat, position.lng);

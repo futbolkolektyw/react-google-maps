@@ -1,5 +1,3 @@
-import {default as React} from "react";
+import {default as SyncReactRoot} from "./containers/SyncReactRoot";
 
-import {default as ReactRoot} from "./ReactRoot";
-
-export default ReactRoot;
+export default SyncReactRoot;
