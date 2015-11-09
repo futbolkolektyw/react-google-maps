@@ -78,24 +78,7 @@ export default class MarkerCreator extends Component {
     const {mapHolderRef} = markerProps;
     var MapMarker = require('map-icons');
     // https://developers.google.com/maps/documentation/javascript/3.exp/reference#Marker
-    const marker = new MapMarker(composeOptions(markerProps, [
-      // https://developers.google.com/maps/documentation/javascript/3.exp/reference#MarkerOptions
-      "animation",
-      "attribution",
-      "clickable",
-      "cursor",
-      "draggable",
-      "icon",
-      "label",
-      "custom_label",
-      "opacity",
-      "place",
-      "position",
-      "shape",
-      "title",
-      "visible",
-      "zIndex",
-    ]));
+    const marker = new MapMarker(composeOptions(markerProps, markerControlledPropTypes));
 
     marker.setMap(mapHolderRef.getMap());
 
