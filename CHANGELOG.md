@@ -1,3 +1,308 @@
+<a name="4.7.0"></a>
+# [4.7.0](https://github.com/tomchentw/react-google-maps/compare/v4.6.2...v4.7.0) (2015-12-07)
+
+
+### Features
+
+* **utils:** add triggerEvent api ([112a1e6](https://github.com/tomchentw/react-google-maps/commit/112a1e6)), closes [#161](https://github.com/tomchentw/react-google-maps/issues/161)
+
+
+
+<a name="4.6.2"></a>
+## [4.6.2](https://github.com/tomchentw/react-google-maps/compare/v4.6.1...v4.6.2) (2015-12-07)
+
+
+### Features
+
+* **SearchBox:** add placeholder props to the underlying input element ([e6a6a02](https://github.com/tomchentw/react-google-maps/commit/e6a6a02)), closes [#115](https://github.com/tomchentw/react-google-maps/issues/115) [#136](https://github.com/tomchentw/react-google-maps/issues/136)
+
+
+
+<a name="4.6.1"></a>
+## [4.6.1](https://github.com/tomchentw/react-google-maps/compare/v4.6.0...v4.6.1) (2015-12-03)
+
+
+### Features
+
+* **GoogleMap:** add warning for undefined google object ([2e0c60b](https://github.com/tomchentw/react-google-maps/commit/2e0c60b)), closes [#142](https://github.com/tomchentw/react-google-maps/issues/142)
+
+
+
+<a name="4.6.0"></a>
+# [4.6.0](https://github.com/tomchentw/react-google-maps/compare/v4.5.1...v4.6.0) (2015-11-22)
+
+
+### Features
+
+* **GoogleMapLoader:** introduce loader to manage React elements ([532816a](https://github.com/tomchentw/react-google-maps/commit/532816a)), closes [#141](https://github.com/tomchentw/react-google-maps/issues/141) [#133](https://github.com/tomchentw/react-google-maps/issues/133)
+* **ScriptjsLoader:** new behavior will render GoogleMapLoader instead ([0f100d8](https://github.com/tomchentw/react-google-maps/commit/0f100d8))
+
+
+### BREAKING CHANGES
+
+* ScriptjsLoader: ScriptjsLoader will delegate to GoogleMapLoader when the script is loaded
+
+Before:
+
+```js
+<ScriptjsLoader
+  hostname={"maps.googleapis.com"}
+  pathname={"/maps/api/js"}
+  query={{v: `3.${ AsyncGettingStarted.version }`, libraries: "geometry,drawing,places"}}
+  loadingElement={
+    <div {...this.props} style={{ height: "100%" }}>
+      <FaSpinner />
+    </div>
+  }
+  googleMapElement={
+    <GoogleMap
+      containerProps={{
+        ...this.props,
+        style: {
+          height: "100%",
+        },
+      }}
+      ref={googleMap => {
+        // Wait until GoogleMap is fully loaded. Related to #133
+        setTimeout(() => {
+          googleMap && console.log(`Zoom: ${ googleMap.getZoom() }`);
+        }, 50);
+      }}
+      defaultZoom={3}
+      defaultCenter={{lat: -25.363882, lng: 131.044922}}
+      onClick={::this.handleMapClick}
+    >
+      <Marker
+        {...this.state.marker}
+        onRightclick={this.handleMarkerRightclick}
+      />
+    </GoogleMap>
+  }
+/>
+```
+
+After:
+
+```js
+<ScriptjsLoader
+  hostname={"maps.googleapis.com"}
+  pathname={"/maps/api/js"}
+  query={{v: `3.${ AsyncGettingStarted.version }`, libraries: "geometry,drawing,places"}}
+  loadingElement={
+    <div {...this.props} style={{ height: "100%" }}>
+      <FaSpinner />
+    </div>
+  }
+  containerElement={
+    <div {...this.props} style={{ height: "100%" }} />
+  }
+  googleMapElement={
+    <GoogleMap
+      ref={googleMap => {
+        googleMap && console.log(`Zoom: ${ googleMap.getZoom() }`);
+      }}
+      defaultZoom={3}
+      defaultCenter={{lat: -25.363882, lng: 131.044922}}
+      onClick={::this.handleMapClick}
+    >
+      <Marker
+        {...this.state.marker}
+        onRightclick={this.handleMarkerRightclick}
+      />
+    </GoogleMap>
+  }
+/>
+```
+* GoogleMapLoader: GoogleMap with props.containerProps is now deprecated. Use GoogleMapLoader with props.googleMapElement instead
+
+We also suggest switching to callback based ref so that you'll get the component instance when it is mounted.
+
+Before:
+
+```js
+<GoogleMap containerProps={{
+    ...this.props,
+    style: {
+      height: "100%",
+    },
+  }}
+  ref="map"
+  defaultZoom={3}
+  defaultCenter={{lat: -25.363882, lng: 131.044922}}
+  onClick={::this.handleMapClick}>
+  {this.state.markers.map((marker, index) => {
+    return (
+      <Marker
+        {...marker}
+        onRightclick={this.handleMarkerRightclick.bind(this, index)} />
+    );
+  })}
+</GoogleMap>
+```
+
+After:
+
+```js
+<GoogleMapLoader
+  containerElement={
+    <div
+      {...this.props}
+      style={{
+        height: "100%",
+      }}
+    />
+  }
+  googleMapElement={
+    <GoogleMap
+      ref={(map) => console.log(map)}
+      defaultZoom={3}
+      defaultCenter={{lat: -25.363882, lng: 131.044922}}
+      onClick={::this.handleMapClick}>
+      {this.state.markers.map((marker, index) => {
+        return (
+          <Marker
+            {...marker}
+            onRightclick={this.handleMarkerRightclick.bind(this, index)} />
+        );
+      })}
+    </GoogleMap>
+  }
+/>
+```
+
+
+
+<a name="4.5.1"></a>
+## [4.5.1](https://github.com/tomchentw/react-google-maps/compare/v4.5.0...v4.5.1) (2015-11-21)
+
+
+### Features
+
+* **ScriptjsLoader:** check with propTypesElementOfType(GoogleMap) ([e8bb97b](https://github.com/tomchentw/react-google-maps/commit/e8bb97b))
+
+
+
+<a name="4.5.0"></a>
+# [4.5.0](https://github.com/tomchentw/react-google-maps/compare/v4.4.1...v4.5.0) (2015-11-21)
+
+
+### Features
+
+* **async/ScriptjsLoader:** replacement of async/ScriptjsGoogleMap ([ccfadd4](https://github.com/tomchentw/react-google-maps/commit/ccfadd4)), closes [#145](https://github.com/tomchentw/react-google-maps/issues/145)
+
+
+### BREAKING CHANGES
+
+* async/ScriptjsLoader: migrate from async/ScriptjsGoogleMap to async/ScriptjsLoader and changed its behavior from implicit inheritance to simple delegation
+
+To migrate the code follow the example below (extracted from examples/gh-pages migration):
+
+Before:
+
+```js
+<ScriptjsLoader
+  hostname={"maps.googleapis.com"}
+  pathname={"/maps/api/js"}
+  query={{v: `3.exp`, libraries: "geometry,drawing,places"}}
+  //
+  // <GoogleMap> props
+  defaultZoom={3}
+  defaultCenter={{lat: -25.363882, lng: 131.044922}}
+  onClick={::this._handle_map_click}
+/>
+```
+
+After:
+
+```js
+<ScriptjsLoader
+  hostname={"maps.googleapis.com"}
+  pathname={"/maps/api/js"}
+  query={{v: `3.exp`, libraries: "geometry,drawing,places"}}
+  //
+  googleMapElement={
+    <GoogleMap
+      defaultZoom={3}
+      defaultCenter={{lat: -25.363882, lng: 131.044922}}
+      onClick={::this._handle_map_click}
+    />
+  }
+/>
+```
+
+
+
+<a name="4.4.1"></a>
+## [4.4.1](https://github.com/tomchentw/react-google-maps/compare/v4.4.0...v4.4.1) (2015-11-19)
+
+
+### Bug Fixes
+
+* **Marker:** remove from MarkerClusterer ([f4e0696](https://github.com/tomchentw/react-google-maps/commit/f4e0696)), closes [#154](https://github.com/tomchentw/react-google-maps/issues/154) [#153](https://github.com/tomchentw/react-google-maps/issues/153)
+
+
+
+<a name="4.4.0"></a>
+# [4.4.0](https://github.com/tomchentw/react-google-maps/compare/v4.3.3...v4.4.0) (2015-11-19)
+
+
+### Features
+
+* **MarkerClusterer:** Support for MarkerClusterPlus API ([d56551c](https://github.com/tomchentw/react-google-maps/commit/d56551c)), closes [#146](https://github.com/tomchentw/react-google-maps/issues/146)
+
+
+
+<a name="4.3.3"></a>
+## [4.3.3](https://github.com/tomchentw/react-google-maps/compare/v4.3.2...v4.3.3) (2015-11-18)
+
+
+### Bug Fixes
+
+* **OverlayView:** redraw only when props.mapPaneName changes ([ff4473d](https://github.com/tomchentw/react-google-maps/commit/ff4473d)), closes [#147](https://github.com/tomchentw/react-google-maps/issues/147) [#148](https://github.com/tomchentw/react-google-maps/issues/148)
+
+
+
+<a name="4.3.2"></a>
+## [4.3.2](https://github.com/tomchentw/react-google-maps/compare/v4.3.1...v4.3.2) (2015-11-17)
+
+
+### Bug Fixes
+
+* **async/ScriptjsGoogleMap:** switch to _.isEqual for key comparasion ([0a1df35](https://github.com/tomchentw/react-google-maps/commit/0a1df35)), closes [#143](https://github.com/tomchentw/react-google-maps/issues/143)
+
+
+
+<a name="4.3.1"></a>
+## [4.3.1](https://github.com/tomchentw/react-google-maps/compare/v4.3.0...v4.3.1) (2015-11-16)
+
+
+### Bug Fixes
+
+* **package.json:** scriptjs should exist in dependencies ([4f3304c](https://github.com/tomchentw/react-google-maps/commit/4f3304c))
+
+
+
+<a name="4.3.0"></a>
+# [4.3.0](https://github.com/tomchentw/react-google-maps/compare/v4.2.1...v4.3.0) (2015-11-16)
+
+
+### Features
+
+* **ScriptjsGoogleMap:** add "scriptjs" support ([b80b731](https://github.com/tomchentw/react-google-maps/commit/b80b731))
+
+
+
+<a name="4.2.1"></a>
+## [4.2.1](https://github.com/tomchentw/react-google-maps/compare/v4.2.0...v4.2.1) (2015-11-16)
+
+
+### Bug Fixes
+
+* **OverlayView:** switch to ReactDOM ([51fe680](https://github.com/tomchentw/react-google-maps/commit/51fe680)), closes [#140](https://github.com/tomchentw/react-google-maps/issues/140)
+* **OverlayView:** use ReactDOM for unmountComponentAtNode ([735eba0](https://github.com/tomchentw/react-google-maps/commit/735eba0)), closes [#137](https://github.com/tomchentw/react-google-maps/issues/137)
+
+
+
 <a name="4.2.0"></a>
 # [4.2.0](https://github.com/tomchentw/react-google-maps/compare/v4.1.1...v4.2.0) (2015-10-15)
 

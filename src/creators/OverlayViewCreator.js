@@ -5,7 +5,10 @@ import {
   Children,
 } from "react";
 
-import {default as ReactDOM} from "react-dom";
+import {
+  render,
+  unmountComponentAtNode,
+} from "react-dom";
 
 import {default as invariant} from "invariant";
 
@@ -56,7 +59,7 @@ export default class OverlayViewCreator extends Component {
     };
 
     overlayView.onRemove = function () {
-      ReactDOM.unmountComponentAtNode(this._containerElement);
+      unmountComponentAtNode(this._containerElement);
       this._unmountContainerFromPane();
       this._containerElement = null;
     };
@@ -71,7 +74,7 @@ export default class OverlayViewCreator extends Component {
     };
 
     overlayView._renderContent = function () {
-      ReactDOM.render(
+      render(
         Children.only(this.get("children")),
         this._containerElement
       );
@@ -143,7 +146,7 @@ export default class OverlayViewCreator extends Component {
 
   componentDidUpdate (prevProps) {
     this.getOverlayView().setValues(this.props);
-    this.getOverlayView()._redraw(this.props.mapPaneName !== prevProps);
+    this.getOverlayView()._redraw(this.props.mapPaneName !== prevProps.mapPaneName);
   }
 
   componentWillUnmount () {

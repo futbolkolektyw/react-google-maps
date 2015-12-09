@@ -3,7 +3,9 @@ import {
   Children,
 } from "react";
 
-import {default as ReactDOM} from "react-dom";
+import {
+  render,
+} from "react-dom";
 
 function renderElement (
   contentElement,
@@ -13,7 +15,7 @@ function renderElement (
     prevContent = document.createElement("div");
   }
 
-  ReactDOM.render(contentElement, prevContent);
+  render(contentElement, prevContent);
   return prevContent;
 }
 

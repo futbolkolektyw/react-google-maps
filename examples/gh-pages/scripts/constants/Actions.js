@@ -70,6 +70,17 @@ export const DROPDOWN_ACTIONS = [
       },
     },
   },
+  {
+    key: "basics__marker-clusterer",
+    displayName: 'MarkerClusterer',
+    path: '#basics/marker-clusterer',
+    component: {
+      componentClass: require("../components/basics/MarkerClusterer"),
+      componentRaw: {
+        __raw: require("!raw-loader!../components/basics/MarkerClusterer"),
+      },
+    },
+  },
   false,
   {
     key: "events__simple-click-event",
@@ -159,3 +170,19 @@ export const RIGHT_ACTIONS = [
 ];
 
 export const ALL_ACTIONS = ACTIONS.concat(DROPDOWN_ACTIONS.filter((x) => { return !!x; })).concat(RIGHT_ACTIONS);
+
+export const ASYNC_ACTIONS = [
+  {
+    key: "async-loader-getting-started",
+    displayName: "Async Loader - Getting Started",
+    path: "#async-loader-gs",
+    component: {
+      componentClass: require("../components/AsyncGettingStarted"),
+      componentProps: {
+      },
+      componentRaw: {
+        __raw: require("!raw-loader!../components/AsyncGettingStarted"),
+      },
+    },
+  },
+];

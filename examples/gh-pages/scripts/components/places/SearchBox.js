@@ -1,8 +1,6 @@
 import {default as React, Component} from "react";
 
-import {default as GoogleMap} from "../../../../../src/GoogleMap";
-import {default as Marker} from "../../../../../src/Marker";
-import {default as SearchBox} from "../../../../../src/SearchBox";
+import {GoogleMap, Marker, SearchBox} from "react-google-maps";
 
 /*
  * https://developers.google.com/maps/documentation/javascript/examples/places-searchbox
@@ -37,14 +35,14 @@ export default class SearchBoxExample extends Component {
     markers: []
   }
 
-  _handle_bounds_changed () {
+  handleBoundsChanged () {
     this.setState({
       bounds: this.refs.map.getBounds(),
       center: this.refs.map.getCenter()
     });
   }
 
-  _handle_places_changed () {
+  handlePlacesChanged () {
     const places = this.refs.searchBox.getPlaces();
     const markers = [];
 
@@ -78,14 +76,15 @@ export default class SearchBoxExample extends Component {
           }
         }}
         defaultZoom={15}
-        onBoundsChanged={::this._handle_bounds_changed}
+        onBoundsChanged={::this.handleBoundsChanged}
         ref="map">
 
         <SearchBox
           bounds={this.state.bounds}
           controlPosition={google.maps.ControlPosition.TOP_LEFT}
-          onPlacesChanged={::this._handle_places_changed}
+          onPlacesChanged={::this.handlePlacesChanged}
           ref="searchBox"
+          placeholder="Customized your placeholder"
           style={SearchBoxExample.inputStyle} />
 
         {this.state.markers.map((marker, index) => (

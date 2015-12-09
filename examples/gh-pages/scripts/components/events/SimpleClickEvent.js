@@ -1,7 +1,6 @@
 import {default as React, Component} from "react";
 
-import {default as GoogleMap} from "../../../../../src/GoogleMap";
-import {default as Marker} from "../../../../../src/Marker";
+import {GoogleMap, Marker} from "react-google-maps";
 
 /*
  * https://developers.google.com/maps/documentation/javascript/examples/event-simple
@@ -19,13 +18,13 @@ export default class SimpleClickEvent extends Component {
     center: this.props.initialCenter,
   }
 
-  _handle_marker_click () {
+  handleMarkerClick () {
     this.setState({
       zoom: 8,
     });
   }
 
-  _handle_map_center_changed () {
+  handleMapCenterChanged () {
     const newPos = this.refs.map.getCenter();
     if (newPos.equals(new google.maps.LatLng(this.props.initialCenter))) {
       // Notice: Check newPos equality here,
@@ -62,11 +61,11 @@ export default class SimpleClickEvent extends Component {
         ref="map"
         zoom={zoom}
         center={center}
-        onCenterChanged={::this._handle_map_center_changed}>
+        onCenterChanged={::this.handleMapCenterChanged}>
         <Marker
           defaultPosition={center}
           title="Click to zoom"
-          onClick={::this._handle_marker_click} />
+          onClick={::this.handleMarkerClick} />
       </GoogleMap>
     );
   }
