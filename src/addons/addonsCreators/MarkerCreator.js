@@ -5,6 +5,10 @@ import {
   Children,
 } from "react";
 
+import {
+  default as PureRenderMinix
+} from "react-addons-pure-render-mixin";
+
 import {default as MarkerEventList} from "../addonsEventLists/MarkerEventList";
 import {default as eventHandlerCreator} from "../../utils/eventHandlerCreator";
 import {default as defaultPropsCreator} from "../../utils/defaultPropsCreator";
@@ -70,6 +74,7 @@ export const markerEventPropTypes = eventPropTypes;
   updaters: markerUpdaters,
 })
 export default class MarkerCreator extends Component {
+  mixins: [PureRenderMixin],
 
   static propTypes = {
     mapHolderRef: PropTypes.instanceOf(GoogleMapHolder).isRequired,

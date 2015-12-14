@@ -4,6 +4,10 @@ import {
 } from "react";
 
 import {
+  default as PureRenderMinix
+} from "react-addons-pure-render-mixin";
+
+import {
   default as canUseDOM,
 } from "can-use-dom";
 
@@ -15,6 +19,8 @@ import {
 } from "./addonsCreators/MarkerCreator";
 
 export default class Marker extends Component {
+  mixins: [PureRenderMixin],
+  
   static propTypes = {
     // Uncontrolled default[props] - used only in componentDidMount
     ...markerDefaultPropTypes,
